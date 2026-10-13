@@ -1,0 +1,1 @@
+"""Core pipeline: ingest -> process -> drive."""
