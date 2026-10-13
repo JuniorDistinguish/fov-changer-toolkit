@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fov-changer-toolkit"
+version = "0.6.3"
+description = "Windows desktop FOV changer toolkit — pipeline ingest/process/drive for camera field-of-view patching"
+readme = "CONTRIBUTING.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "fov-changer-toolkit contributors" }]
+keywords = ["fov", "fov-changer", "camera", "modding", "windows", "overlay"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Win32 (MS Windows)",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: C++",
+    "Programming Language :: C#",
+    "Programming Language :: Java",
+    "Topic :: Games/Entertainment",
+    "Topic :: Utilities",
+]
+
+dependencies = [
+    "pymem>=1.13.0",
+    "pywin32>=306",
+    "tomli>=2.0.1; python_version < '3.11'",
+    "pydantic>=2.6",
+    "rich>=13.7",
+    "typer>=0.12",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.10",
+]
+overlay = ["pyimgui>=2.0.0", "glfw>=2.7.0"]
+
+[project.scripts]
+fov-changer = "fov_changer_toolkit.__main__:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fov_changer_toolkit*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+strict = true
+python_version = "3.11"
+files = ["src/fov_changer_toolkit/core", "src/fov_changer_toolkit/handlers", "src/fov_changer_toolkit/services"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
