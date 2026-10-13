@@ -1,0 +1,1 @@
+"""Config — offsets, defaults, validation."""
